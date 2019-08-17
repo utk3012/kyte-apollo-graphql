@@ -1,0 +1,67 @@
+type Query { 
+    getUser(userId: ID!): User!
+}
+
+type Mutation {
+    registerUser(registerUserInput: RegisterUserInput!): Message!
+    loginUser(email: String!, password: String!): LoggedUser!
+    createPost(post: String!, public: Boolean!): Message!
+    sendRequest(userId: ID!): Message!
+    acceptRequest(userId: ID!): Message!
+}
+
+input RegisterUserInput {
+    name: String!
+    username: String!
+    email: String!
+    password: String!
+    image: String!
+    birthday: String!
+    gender: String!
+}
+
+type LoggedUser {
+    token: String!
+    message: String!
+}
+
+type Message {
+    message: String!
+    success: Int!
+}
+
+type Post {
+    _id: ID!
+    post: String!
+    public: Boolean!
+    likes: [ListUser!]
+    creator: ListUser
+}
+
+type User {
+    _id: ID!
+    name: String!
+    username: String!
+    email: String!
+    birthday: String!
+    image: String!
+    gender: String!
+    joined: String!
+    friends: [ListUser!]
+    requests: [ListUser!]
+    requested: [ListUser!]
+    blocked: [ListUser!]
+    posts: [Post]
+    friendPosts: [Post]
+}
+
+type ListUser {
+    _id: ID!
+    name: String!
+    username: String!
+    email: String!
+    birthday: String!
+    image: String!
+    gender: String!
+    joined: String!
+}
